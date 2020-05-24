@@ -6,4 +6,4 @@ import org.springframework.stereotype.Repository;
 import com.ftsp.backtracking.model.BoardParameters;
 
 @Repository
-public interface BoardRepository extends CrudRepository<BoardParameters, Long> {}
+public interface BoardRepository extends CrudRepository<BoardParameters, String> {}

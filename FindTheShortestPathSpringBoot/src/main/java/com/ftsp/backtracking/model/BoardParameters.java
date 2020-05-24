@@ -1,8 +1,11 @@
 package com.ftsp.backtracking.model;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,10 +15,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Table(name = "boardparameters")
 public class BoardParameters {
 	
-	@Id
-	@GeneratedValue
-	private Long id;
+	/*
+	 * @Id
+	 * 
+	 * @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
+	 */
 	
+	@Id
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "BOARDNAME")
 	private String boardName;
 	
@@ -51,8 +58,7 @@ public class BoardParameters {
 	
 	protected BoardParameters() {}
 	
-	public BoardParameters(@JsonProperty("id") Long id,
-						   @JsonProperty("name") String boardName,
+	public BoardParameters(@JsonProperty("name") String boardName,
 						   @JsonProperty("xpixels") int xPixelSize, 
 						   @JsonProperty("ypixels") int yPixelSize, 
 						   @JsonProperty("xboxes") int xBoxes, 
@@ -62,8 +68,7 @@ public class BoardParameters {
 						   @JsonProperty("finalxpos") int finalXPosition, 
 						   @JsonProperty("finalypos") int finalYPosition, 
 						   @JsonProperty("chance") double percentChance, 
-						   @JsonProperty("wait") int wait) {
-		this.id = id;
+						   @JsonProperty("wait") int wait) {		
 		this.boardName = boardName;
 		this.xPixelSize = xPixelSize;
 		this.yPixelSize = yPixelSize;
@@ -75,8 +80,10 @@ public class BoardParameters {
 		this.finalYPosition = finalYPosition;
 		this.percentChance = percentChance;
 		this.wait = wait;
+		
+		//id = (UUID.randomUUID().getMostSignificantBits()&Long.MAX_VALUE);
 	}
-	
+		
 	public String getBoardName() {
 		return boardName;
 	}

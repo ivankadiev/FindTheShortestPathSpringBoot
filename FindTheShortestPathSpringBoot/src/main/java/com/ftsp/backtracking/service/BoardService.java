@@ -30,4 +30,13 @@ private final BoardRepository DB;
 	public List<BoardParameters> showAllBoardEntries() {
 		return (List<BoardParameters>) DB.findAll();
 	}
+	
+	public BoardParameters replaceParameters(String boardName) {
+		DB.findById(boardName);
+		return null;
+	}
+	
+	public BoardParameters showBoardEntry(String boardName) {
+		return DB.findById(boardName).get();
+	}
 }
