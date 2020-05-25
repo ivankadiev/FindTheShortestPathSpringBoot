@@ -24,9 +24,15 @@ public class BoardService {
 	}
 	
 	
-	public void runFTSP(String boardName) {
+	public ResponseEntity<String> runFTSP(String boardName) {
 		Algorithm ftps = new Algorithm(DB.findById(boardName).get());
-		ftps.run();
+		int shortestLength = ftps.run();
+		
+		if (shortestLength != Integer.MAX_VALUE) {
+			return ResponseEntity.ok("This is the shortest path with a length of " + shortestLength + "!");
+		} else {
+			return ResponseEntity.ok("This rendering does not have a solution!");
+		}
 	}
 	
 	

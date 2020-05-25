@@ -42,8 +42,8 @@ public class Controller {
 	
 	
 	@GetMapping(path = "{name}/run")
-	public void executeFTSP(@PathVariable("name") String boardName) {
-		boardService.runFTSP(boardName);
+	public ResponseEntity<String> executeFTSP(@PathVariable("name") String boardName) {
+		return boardService.runFTSP(boardName);
 	}
 	
 	

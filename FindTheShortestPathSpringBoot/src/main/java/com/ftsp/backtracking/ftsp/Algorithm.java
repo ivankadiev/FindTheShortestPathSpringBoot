@@ -25,7 +25,6 @@ public class Algorithm {
 				board.saveSolution();
 			}
 			
-			System.out.println("A solution was found with length " + currentLength + "!");
 			board.showEndVisuals();
 		} else {
 			if (board.neighbourCellIsFree(StaticParameters.LEFT) && (!board.neighbourCellIsVisited(StaticParameters.LEFT))) {
@@ -48,17 +47,16 @@ public class Algorithm {
 	}
 	
 	
-	public void run() {
+	public int run() {
 		shortestLength = Integer.MAX_VALUE;
 		currentLength = 0;
 		
 		findShortestPath(StaticParameters.INITIALIZE);
 		
-		if (!(shortestLength == Integer.MAX_VALUE)) {
-			System.out.println("\nThis is (one of) the shortest path(s) with a length of " + shortestLength + "!");
+		if (shortestLength != Integer.MAX_VALUE) {
 			board.printSolution();
-		} else {
-			System.out.println("\nThis rendering does not have a solution!");
 		}
+
+		return shortestLength;
 	}
 }
