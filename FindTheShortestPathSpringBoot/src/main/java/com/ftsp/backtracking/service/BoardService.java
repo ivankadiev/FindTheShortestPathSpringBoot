@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.ftsp.backtracking.ftsp.Algorithm;
 import com.ftsp.backtracking.model.BoardParameters;
-import com.ftsp.backtracking.rep.BoardRepository;
+import com.ftsp.backtracking.repository.BoardRepository;
 
 @Service
 public class BoardService {
