@@ -11,32 +11,37 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.ftsp.backtracking.StaticParameters;
+import com.ftsp.backtracking.model.BoardParameters;
+
 public class Canvas extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	private BoardParameters parameters;
     private JPanel panel;
     private JLabel[][] gridBoxes;
     private ImageIcon boulder, path, end;
     
     
-    Canvas() {
+    Canvas(BoardParameters parameters) {
+    	this.parameters = parameters;
+    	
     	createBoard();	
     }
     
     
     private void createBoard() {
     	setTitle("Find The Shortest Path"); 
-    	setSize(Parameters.X_PIXEL_SIZE, Parameters.Y_PIXEL_SIZE);
+    	setSize(parameters.getxPixelSize(), parameters.getyPixelSize());
     	
-    	panel = new JPanel(new GridLayout(Parameters.X_BOXES, Parameters.Y_BOXES));
+    	panel = new JPanel(new GridLayout(parameters.getxBoxes(), parameters.getyBoxes()));
     	panel.setBackground(Color.DARK_GRAY);
     	setContentPane(panel);
     	
     	loadImages();
     	initializeBoard();
     	
-    	setDefaultCloseOperation(EXIT_ON_CLOSE);
     	setResizable(false);
     	setLocationRelativeTo(null);
     	setVisible(true);
@@ -55,31 +60,31 @@ public class Canvas extends JFrame {
     
     
     private void initializeBoard() {
-    	gridBoxes = new JLabel[Parameters.X_BOXES][Parameters.Y_BOXES];
+    	gridBoxes = new JLabel[parameters.getxBoxes()][parameters.getyBoxes()];
     	
-    	for (int x=0; x<Parameters.X_BOXES; x++) {
-    		for (int y=0; y<Parameters.Y_BOXES; y++) {
+    	for (int x=0; x<parameters.getxBoxes(); x++) {
+    		for (int y=0; y<parameters.getyBoxes(); y++) {
     			gridBoxes[x][y] = new JLabel();
     			gridBoxes[x][y].setVerticalAlignment(JLabel.CENTER);
     			gridBoxes[x][y].setHorizontalAlignment(JLabel.CENTER);
     	    	panel.add(gridBoxes[x][y]);
     	    	
-    	    	if ((x==0) || (x==Parameters.X_BOXES-1) || (y==0) || (y==Parameters.Y_BOXES-1)) {
+    	    	if ((x==0) || (x==parameters.getxBoxes()-1) || (y==0) || (y==parameters.getyBoxes()-1)) {
     	    		// Create a frame boulder around the board
-    	    		changeLabelTo(Parameters.BOULDER, x, y);
-    	    	} else if ((x==Parameters.INITIAL_X_POSITION) && (y==Parameters.INITIAL_Y_POSITION)) {
+    	    		changeLabelTo(StaticParameters.BOULDER, x, y);
+    	    	} else if ((x==parameters.getInitialXPosition()) && (y==parameters.getInitialYPosition())) {
     	    		// Set initial position
-    	    		changeLabelTo(Parameters.PATH, x, y);
-    	    	} else if ((x==Parameters.FINAL_X_POSITION) && (y==Parameters.FINAL_Y_POSITION)) {
+    	    		changeLabelTo(StaticParameters.PATH, x, y);
+    	    	} else if ((x==parameters.getFinalXPosition()) && (y==parameters.getFinalYPosition())) {
     	    		// Set Final position
-    	    		changeLabelTo(Parameters.END, x, y);
+    	    		changeLabelTo(StaticParameters.END, x, y);
     	    	} else {
     	    		// Put boulders on random positions on the board
     	    		Random rand = new Random();
     	    		double chanceOfBoulder = rand.nextDouble();
     	    		
-    	    		if (chanceOfBoulder <= Parameters.PERCENT_CHANCE) {
-    	    			changeLabelTo(Parameters.BOULDER, x, y);
+    	    		if (chanceOfBoulder <= parameters.getPercentChance()) {
+    	    			changeLabelTo(StaticParameters.BOULDER, x, y);
     	    		}
     	    	}
     		}
@@ -88,22 +93,22 @@ public class Canvas extends JFrame {
     
     
     public void printBoard(JLabel[][] solution) {
-    	for (int x=0; x<Parameters.X_BOXES; x++) {
-    		for (int y=0; y<Parameters.Y_BOXES; y++) {
+    	for (int x=0; x<parameters.getxBoxes(); x++) {
+    		for (int y=0; y<parameters.getyBoxes(); y++) {
     			gridBoxes[x][y].setIcon(solution[x][y].getIcon());
     		}
     		
-    		changeLabelTo(Parameters.PATH, Parameters.FINAL_X_POSITION, Parameters.FINAL_Y_POSITION);
+    		changeLabelTo(StaticParameters.PATH, parameters.getFinalXPosition(), parameters.getFinalYPosition());
     	}
     }
     
     
     public void changeLabelTo(String object, int x, int y) {
     	switch(object) {
-    	case Parameters.PATH: gridBoxes[x][y].setIcon(path); break;
-    	case Parameters.BOULDER: gridBoxes[x][y].setIcon(boulder); break;
-    	case Parameters.END: gridBoxes[x][y].setIcon(end); break;
-    	case Parameters.EMPTY: gridBoxes[x][y].setIcon(new ImageIcon()); break;
+    	case StaticParameters.PATH: gridBoxes[x][y].setIcon(path); break;
+    	case StaticParameters.BOULDER: gridBoxes[x][y].setIcon(boulder); break;
+    	case StaticParameters.END: gridBoxes[x][y].setIcon(end); break;
+    	case StaticParameters.EMPTY: gridBoxes[x][y].setIcon(new ImageIcon()); break;
     	}
     }
     

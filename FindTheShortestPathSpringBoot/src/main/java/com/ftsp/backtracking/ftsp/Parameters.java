@@ -1,27 +1,31 @@
 package com.ftsp.backtracking.ftsp;
 
+import com.ftsp.backtracking.model.BoardParameters;
+
 public class Parameters {
 
-	public static final int X_PIXEL_SIZE = 1200; // Set the number of pixels the JPanel displays on the x axis
-	public static final int Y_PIXEL_SIZE = 1200; // Set the number of pixels the JPanel displays on the y axis
-	public static final int X_BOXES = 20; // Set the number of boxes the JPanel grid has on the x axis
-	public static final int Y_BOXES = 20; // Set the number of boxes the JPanel grid has on the y axis
-	public static final int INITIAL_X_POSITION = 1; // Set the initial position of the path on the x axis
-	public static final int INITIAL_Y_POSITION = 1; // Set the initial position of the path on the y axis
-	public static final int FINAL_X_POSITION = 18; // Set the final position of the path on the x axis
-	public static final int FINAL_Y_POSITION = 18; // Set the final position of the path on the y axis
+	public final int X_PIXEL_SIZE; // Set the number of pixels the JPanel displays on the x axis
+	public final int Y_PIXEL_SIZE; // Set the number of pixels the JPanel displays on the y axis
+	public final int X_BOXES; // Set the number of boxes the JPanel grid has on the x axis
+	public final int Y_BOXES; // Set the number of boxes the JPanel grid has on the y axis
+	public final int INITIAL_X_POSITION; // Set the initial position of the path on the x axis
+	public final int INITIAL_Y_POSITION; // Set the initial position of the path on the y axis
+	public final int FINAL_X_POSITION; // Set the final position of the path on the x axis
+	public final int FINAL_Y_POSITION; // Set the final position of the path on the y axis
 	
-	public static final double PERCENT_CHANCE = 0.2; // Set the percentage chance of a random boulder being placed on the board
-	public static final int WAIT = 20; // Control the animation speed
+	public final double PERCENT_CHANCE; // Set the percentage chance of a random boulder being placed on the board
+	public final int WAIT; // Control the animation speed
 	
-	public static final String PATH = "PATH"; 
-	public static final String BOULDER = "BOULDER";
-	public static final String END = "END";
-	public static final String EMPTY = "EMPTY";
-	
-	public static final String LEFT = "LEFT";
-	public static final String RIGHT = "RIGHT";
-	public static final String UP = "UP";
-	public static final String DOWN = "DOWN";
-	public static final String INITIALIZE = "";	
+	public Parameters(BoardParameters parameters) {
+		X_PIXEL_SIZE = parameters.getxPixelSize();
+		Y_PIXEL_SIZE = parameters.getyPixelSize();
+		X_BOXES = parameters.getxBoxes();
+		Y_BOXES = parameters.getyBoxes();
+		INITIAL_X_POSITION = parameters.getInitialXPosition();
+		INITIAL_Y_POSITION = parameters.getInitialYPosition();
+		FINAL_X_POSITION = parameters.getFinalXPosition();
+		FINAL_Y_POSITION = parameters.getFinalYPosition();
+		PERCENT_CHANCE = parameters.getPercentChance();
+		WAIT = parameters.getWait();
+	}
 }

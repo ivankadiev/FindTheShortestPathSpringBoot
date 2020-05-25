@@ -1,13 +1,16 @@
 package com.ftsp.backtracking.ftsp;
 
+import com.ftsp.backtracking.StaticParameters;
+import com.ftsp.backtracking.model.BoardParameters;
+
 public class Algorithm {
 	
 	private Board board;
 	private int currentLength, shortestLength;
 
 	
-	public Algorithm() {
-		board = new Board();
+	public Algorithm(BoardParameters parameters) {
+		board = new Board(parameters);
 	}
 	
 	
@@ -25,17 +28,17 @@ public class Algorithm {
 			System.out.println("A solution was found with length " + currentLength + "!");
 			board.showEndVisuals();
 		} else {
-			if (board.neighbourCellIsFree(Parameters.LEFT) && (!board.neighbourCellIsVisited(Parameters.LEFT))) {
-				findShortestPath(Parameters.LEFT);
+			if (board.neighbourCellIsFree(StaticParameters.LEFT) && (!board.neighbourCellIsVisited(StaticParameters.LEFT))) {
+				findShortestPath(StaticParameters.LEFT);
 			}
-			if (board.neighbourCellIsFree(Parameters.UP) && (!board.neighbourCellIsVisited(Parameters.UP))) {
-				findShortestPath(Parameters.UP);
+			if (board.neighbourCellIsFree(StaticParameters.UP) && (!board.neighbourCellIsVisited(StaticParameters.UP))) {
+				findShortestPath(StaticParameters.UP);
 			}
-			if (board.neighbourCellIsFree(Parameters.RIGHT) && (!board.neighbourCellIsVisited(Parameters.RIGHT))) {
-				findShortestPath(Parameters.RIGHT);
+			if (board.neighbourCellIsFree(StaticParameters.RIGHT) && (!board.neighbourCellIsVisited(StaticParameters.RIGHT))) {
+				findShortestPath(StaticParameters.RIGHT);
 			}
-			if (board.neighbourCellIsFree(Parameters.DOWN) && (!board.neighbourCellIsVisited(Parameters.DOWN))) {
-				findShortestPath(Parameters.DOWN); 
+			if (board.neighbourCellIsFree(StaticParameters.DOWN) && (!board.neighbourCellIsVisited(StaticParameters.DOWN))) {
+				findShortestPath(StaticParameters.DOWN); 
 			}
 		}
 		
@@ -49,7 +52,7 @@ public class Algorithm {
 		shortestLength = Integer.MAX_VALUE;
 		currentLength = 0;
 		
-		findShortestPath(Parameters.INITIALIZE);
+		findShortestPath(StaticParameters.INITIALIZE);
 		
 		if (!(shortestLength == Integer.MAX_VALUE)) {
 			System.out.println("\nThis is (one of) the shortest path(s) with a length of " + shortestLength + "!");

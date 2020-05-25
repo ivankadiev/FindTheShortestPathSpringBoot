@@ -24,8 +24,8 @@ public class BoardService {
 	}
 	
 	
-	public void runFTSP() {
-		Algorithm ftps = new Algorithm();
+	public void runFTSP(String boardName) {
+		Algorithm ftps = new Algorithm(DB.findById(boardName).get());
 		ftps.run();
 	}
 	

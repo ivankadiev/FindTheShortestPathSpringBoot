@@ -2,48 +2,55 @@ package com.ftsp.backtracking.ftsp;
 
 import javax.swing.JLabel;
 
+import com.ftsp.backtracking.StaticParameters;
+import com.ftsp.backtracking.model.BoardParameters;
+
 public class Board {
 
 	private Canvas board;
+	private BoardParameters parameters;
 	private JLabel[][] solution;
+	
 	private boolean[][] visitedCells;
 	private int xPosition, yPosition;
 	
 	
-	Board() {    	
-		visitedCells = new boolean[Parameters.X_BOXES][Parameters.Y_BOXES];
-		solution = new JLabel[Parameters.X_BOXES][Parameters.Y_BOXES];
+	Board(BoardParameters parameters) {
+		this.parameters = parameters;
 		
-		xPosition = Parameters.INITIAL_X_POSITION;
-		yPosition = Parameters.INITIAL_Y_POSITION;
+		visitedCells = new boolean[this.parameters.getxBoxes()][this.parameters.getyBoxes()];
+		solution = new JLabel[this.parameters.getxBoxes()][this.parameters.getyBoxes()];
 		
-		board = new Canvas();
+		xPosition = this.parameters.getInitialXPosition();
+		yPosition = this.parameters.getInitialYPosition();
+		
+		board = new Canvas(parameters);
 	}		
 	
 	
 	public void move(String direction) {
 		switch (direction) {
-		case Parameters.LEFT: updateVisuals(Parameters.PATH, xPosition, --yPosition); break;
-		case Parameters.UP: updateVisuals(Parameters.PATH, --xPosition, yPosition); break;	
-		case Parameters.RIGHT: updateVisuals(Parameters.PATH, xPosition, ++yPosition); break;	
-		case Parameters.DOWN: updateVisuals(Parameters.PATH, ++xPosition, yPosition); break;
+		case StaticParameters.LEFT: updateVisuals(StaticParameters.PATH, xPosition, --yPosition); break;
+		case StaticParameters.UP: updateVisuals(StaticParameters.PATH, --xPosition, yPosition); break;	
+		case StaticParameters.RIGHT: updateVisuals(StaticParameters.PATH, xPosition, ++yPosition); break;	
+		case StaticParameters.DOWN: updateVisuals(StaticParameters.PATH, ++xPosition, yPosition); break;
 		} 
 	}
 	
 	
 	public void moveOppositeDirection(String direction) {
 		switch (direction) {
-		case Parameters.LEFT: updateVisuals(Parameters.EMPTY, xPosition, yPosition++); break;
-		case Parameters.UP: updateVisuals(Parameters.EMPTY, xPosition++, yPosition); break;
-		case Parameters.RIGHT: updateVisuals(Parameters.EMPTY, xPosition, yPosition--); break;
-		case Parameters.DOWN: updateVisuals(Parameters.EMPTY, xPosition--, yPosition); break;
+		case StaticParameters.LEFT: updateVisuals(StaticParameters.EMPTY, xPosition, yPosition++); break;
+		case StaticParameters.UP: updateVisuals(StaticParameters.EMPTY, xPosition++, yPosition); break;
+		case StaticParameters.RIGHT: updateVisuals(StaticParameters.EMPTY, xPosition, yPosition--); break;
+		case StaticParameters.DOWN: updateVisuals(StaticParameters.EMPTY, xPosition--, yPosition); break;
 		} 
 	}
 	
 	
 	private void updateVisuals(String object, int x, int y) {
 		try {
-			Thread.sleep(Parameters.WAIT);
+			Thread.sleep(parameters.getWait());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -55,24 +62,24 @@ public class Board {
 	
 	
 	public void showEndVisuals() {
-		board.changeLabelTo(Parameters.PATH, xPosition, yPosition);
+		board.changeLabelTo(StaticParameters.PATH, xPosition, yPosition);
 		
 		try {
-			Thread.sleep(Parameters.WAIT);
+			Thread.sleep(parameters.getWait());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		
-		board.changeLabelTo(Parameters.END, xPosition, yPosition);
+		board.changeLabelTo(StaticParameters.END, xPosition, yPosition);
 	}
 	
 	
 	public boolean neighbourCellIsFree(String direction) {
 		switch (direction) {
-		case Parameters.LEFT: return (!(board.isBoulder(xPosition, yPosition-1))); 
-		case Parameters.UP: return (!(board.isBoulder(xPosition-1, yPosition))); 
-		case Parameters.RIGHT: return (!(board.isBoulder(xPosition, yPosition+1))); 
-		case Parameters.DOWN: return (!(board.isBoulder(xPosition+1, yPosition)));
+		case StaticParameters.LEFT: return (!(board.isBoulder(xPosition, yPosition-1))); 
+		case StaticParameters.UP: return (!(board.isBoulder(xPosition-1, yPosition))); 
+		case StaticParameters.RIGHT: return (!(board.isBoulder(xPosition, yPosition+1))); 
+		case StaticParameters.DOWN: return (!(board.isBoulder(xPosition+1, yPosition)));
 		} 
 		
 		System.out.println("Incorrect command.");
@@ -83,10 +90,10 @@ public class Board {
 	
 	public boolean neighbourCellIsVisited(String direction) {
 		switch (direction) {
-		case Parameters.LEFT: return (visitedCells[xPosition][yPosition-1]); 
-		case Parameters.UP: return (visitedCells[xPosition-1][yPosition]); 
-		case Parameters.RIGHT: return (visitedCells[xPosition][yPosition+1]);
-		case Parameters.DOWN: return (visitedCells[xPosition+1][yPosition]);
+		case StaticParameters.LEFT: return (visitedCells[xPosition][yPosition-1]); 
+		case StaticParameters.UP: return (visitedCells[xPosition-1][yPosition]); 
+		case StaticParameters.RIGHT: return (visitedCells[xPosition][yPosition+1]);
+		case StaticParameters.DOWN: return (visitedCells[xPosition+1][yPosition]);
 		} 
 		
 		System.out.println("Incorrect command.");
@@ -111,8 +118,8 @@ public class Board {
 	
 	
 	public void saveSolution() {
-		for (int x=0; x<Parameters.X_BOXES; x++) {
-    		for (int y=0; y<Parameters.Y_BOXES; y++) {
+		for (int x=0; x<parameters.getxBoxes(); x++) {
+    		for (int y=0; y<parameters.getyBoxes(); y++) {
     			solution[x][y] = new JLabel();
     			solution[x][y].setIcon(board.getJLabel(x, y).getIcon()); 
     		}

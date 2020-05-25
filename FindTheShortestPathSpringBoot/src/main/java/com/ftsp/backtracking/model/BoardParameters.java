@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ftsp.backtracking.ftsp.Parameters;
+import com.ftsp.backtracking.StaticParameters;
 
 @Entity
 @Table(name = "boardparameters")
@@ -87,7 +87,7 @@ public class BoardParameters {
 						  @JsonProperty("finalypos") int finalYPosition, 
 						  @JsonProperty("chance") double percentChance, 
 						  @JsonProperty("wait") int wait) {		
-		this.boardName = Parameters.EMPTY;
+		this.boardName = StaticParameters.EMPTY;
 		this.xPixelSize = xPixelSize;
 		this.yPixelSize = yPixelSize;
 		this.xBoxes = xBoxes;

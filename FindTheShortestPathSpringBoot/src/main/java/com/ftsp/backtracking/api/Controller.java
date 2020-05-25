@@ -41,15 +41,15 @@ public class Controller {
 	}
 	
 	
-	@PostMapping
-	public ResponseEntity<String> insertBoardEntry(@RequestBody BoardParameters parameters) {
-		return boardService.insertBoardEntry(parameters);
+	@GetMapping(path = "{name}/run")
+	public void executeFTSP(@PathVariable("name") String boardName) {
+		boardService.runFTSP(boardName);
 	}
 	
 	
-	@GetMapping(path = "/run")
-	public void executeFTSP() {
-		boardService.runFTSP();
+	@PostMapping
+	public ResponseEntity<String> insertBoardEntry(@RequestBody BoardParameters parameters) {
+		return boardService.insertBoardEntry(parameters);
 	}
 	
 	
