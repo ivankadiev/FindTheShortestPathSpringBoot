@@ -1,28 +1,18 @@
 package com.ftsp.backtracking.model;
 
-import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ftsp.backtracking.ftsp.Parameters;
 
 @Entity
 @Table(name = "boardparameters")
 public class BoardParameters {
 	
-	/*
-	 * @Id
-	 * 
-	 * @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
-	 */
-	
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "BOARDNAME")
 	private String boardName;
 	
@@ -58,6 +48,7 @@ public class BoardParameters {
 	
 	protected BoardParameters() {}
 	
+	// For creating a new object with a name
 	public BoardParameters(@JsonProperty("name") String boardName,
 						   @JsonProperty("xpixels") int xPixelSize, 
 						   @JsonProperty("ypixels") int yPixelSize, 
@@ -80,12 +71,38 @@ public class BoardParameters {
 		this.finalYPosition = finalYPosition;
 		this.percentChance = percentChance;
 		this.wait = wait;
-		
-		//id = (UUID.randomUUID().getMostSignificantBits()&Long.MAX_VALUE);
 	}
+	
+	// For creating a new object without a name
+	public BoardParameters(@JsonProperty("xpixels") int xPixelSize, 
+						  @JsonProperty("ypixels") int yPixelSize, 
+						  @JsonProperty("xboxes") int xBoxes, 
+						  @JsonProperty("yboxes") int yBoxes, 
+						  @JsonProperty("initxpos") int initialXPosition,
+						  @JsonProperty("initypos") int initialYPosition, 
+						  @JsonProperty("finalxpos") int finalXPosition, 
+						  @JsonProperty("finalypos") int finalYPosition, 
+						  @JsonProperty("chance") double percentChance, 
+						  @JsonProperty("wait") int wait) {		
+		this.boardName = Parameters.EMPTY;
+		this.xPixelSize = xPixelSize;
+		this.yPixelSize = yPixelSize;
+		this.xBoxes = xBoxes;
+		this.yBoxes = yBoxes;
+		this.initialXPosition = initialXPosition;
+		this.initialYPosition = initialYPosition;
+		this.finalXPosition = finalXPosition;
+		this.finalYPosition = finalYPosition;
+		this.percentChance = percentChance;
+		this.wait = wait;
+}
 		
 	public String getBoardName() {
 		return boardName;
+	}
+	
+	public void setBoardName(String boardName) {
+		this.boardName = boardName;
 	}
 
 	public int getxPixelSize() {

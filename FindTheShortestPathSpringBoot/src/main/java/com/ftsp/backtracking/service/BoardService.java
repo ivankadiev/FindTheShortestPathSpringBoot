@@ -13,7 +13,8 @@ import com.ftsp.backtracking.rep.BoardRepository;
 
 @Service
 public class BoardService {
-private final BoardRepository DB;
+	
+	private final BoardRepository DB;
 	
 	@Autowired
 	public BoardService(BoardRepository DB) {
@@ -30,7 +31,7 @@ private final BoardRepository DB;
 			DB.save(parameters); 
 			return ResponseEntity.ok(parameters.getBoardName() + " saved successfully.");
 		} else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The following board size already exists in the database: " + parameters.getBoardName());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(parameters.getBoardName() + " already exists in the database.");
 		}
 	}
 	
@@ -38,9 +39,16 @@ private final BoardRepository DB;
 		return (List<BoardParameters>) DB.findAll();
 	}
 	
-	public BoardParameters replaceParameters(String boardName) {
-		DB.findById(boardName);
-		return null;
+	public ResponseEntity<String> replaceParameters(String boardName, BoardParameters parameters) {
+		if (DB.existsById(boardName)) {
+			DB.replaceByID(boardName, parameters); 
+			return ResponseEntity.ok(boardName + " updated successfully.");
+		} else {
+			String badRequest = ("The board entry (" + boardName + ") does not exists in the database.\n"
+							   + "Please create the entry " + boardName + " first in order to update it.");
+			
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body((badRequest));
+		}
 	}
 	
 	public BoardParameters showBoardEntry(String boardName) {

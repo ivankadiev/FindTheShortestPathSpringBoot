@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ftsp.backtracking.model.BoardParameters;
 import com.ftsp.backtracking.service.BoardService;
 
-@RequestMapping("board_parameters")
+@RequestMapping("board_db")
 @RestController
 public class Controller {
 
@@ -47,7 +47,7 @@ public class Controller {
 	}
 	
 	@PutMapping(path = "{name}")
-	public BoardParameters changeParameters(@PathVariable("name") String boardName) {
-		return boardService.replaceParameters(boardName);
+	public ResponseEntity<String> changeParameters(@PathVariable("name") String boardName, @RequestBody BoardParameters parameters) {
+		return boardService.replaceParameters(boardName, parameters);
 	}
 }
