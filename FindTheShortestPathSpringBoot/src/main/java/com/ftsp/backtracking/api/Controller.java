@@ -3,6 +3,7 @@ package com.ftsp.backtracking.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,7 @@ public class Controller {
 		this.boardService = boardService;
 	}
 	
-	@GetMapping
+	@GetMapping(path = "/all")
 	public List<BoardParameters> showAllBoardEntries() {
 		return boardService.showAllBoardEntries();
 	}
@@ -41,8 +42,8 @@ public class Controller {
 	}
 	
 	@PostMapping
-	public void insertBoardEntry(@RequestBody BoardParameters parameters) {
-		boardService.insertBoardEntry(parameters);
+	public ResponseEntity<String> insertBoardEntry(@RequestBody BoardParameters parameters) {
+		return boardService.insertBoardEntry(parameters);
 	}
 	
 	@PutMapping(path = "{name}")

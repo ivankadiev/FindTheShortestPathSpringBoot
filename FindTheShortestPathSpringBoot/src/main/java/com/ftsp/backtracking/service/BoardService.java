@@ -3,6 +3,8 @@ package com.ftsp.backtracking.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ftsp.backtracking.ftsp.Algorithm;
@@ -23,8 +25,13 @@ private final BoardRepository DB;
 		ftps.run();
 	}
 	
-	public void insertBoardEntry(BoardParameters parameters) {
-		DB.save(parameters);
+	public ResponseEntity<String> insertBoardEntry(BoardParameters parameters) {
+		if (!DB.existsById(parameters.getBoardName())) {
+			DB.save(parameters); 
+			return ResponseEntity.ok(parameters.getBoardName() + " saved successfully.");
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The following board size already exists in the database: " + parameters.getBoardName());
+		}
 	}
 	
 	public List<BoardParameters> showAllBoardEntries() {
