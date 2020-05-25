@@ -8,6 +8,7 @@ import com.ftsp.backtracking.model.BoardParameters;
 @Repository
 public interface BoardRepository extends CrudRepository<BoardParameters, String> {
 	
+	
 	default void replaceByID(String boardName, BoardParameters newParameters) {
 		BoardParameters parameters = findById(boardName).get();
 		

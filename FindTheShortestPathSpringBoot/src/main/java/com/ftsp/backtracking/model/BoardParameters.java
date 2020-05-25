@@ -46,7 +46,9 @@ public class BoardParameters {
 	@Column(name = "WAIT")
 	private int wait; // Control the animation speed
 	
+	
 	protected BoardParameters() {}
+	
 	
 	// For creating a new object with a name
 	public BoardParameters(@JsonProperty("name") String boardName,
@@ -73,6 +75,7 @@ public class BoardParameters {
 		this.wait = wait;
 	}
 	
+	
 	// For creating a new object without a name
 	public BoardParameters(@JsonProperty("xpixels") int xPixelSize, 
 						  @JsonProperty("ypixels") int yPixelSize, 
@@ -95,91 +98,113 @@ public class BoardParameters {
 		this.finalYPosition = finalYPosition;
 		this.percentChance = percentChance;
 		this.wait = wait;
-}
+	}
+	
 		
 	public String getBoardName() {
 		return boardName;
 	}
 	
+	
 	public void setBoardName(String boardName) {
 		this.boardName = boardName;
 	}
+	
 
 	public int getxPixelSize() {
 		return xPixelSize;
 	}
+	
 
 	public void setxPixelSize(int xPixelSize) {
 		this.xPixelSize = xPixelSize;
 	}
+	
 
 	public int getyPixelSize() {
 		return yPixelSize;
 	}
+	
 
 	public void setyPixelSize(int yPixelSize) {
 		this.yPixelSize = yPixelSize;
 	}
+	
 
 	public int getxBoxes() {
 		return xBoxes;
 	}
 
+	
 	public void setxBoxes(int xBoxes) {
 		this.xBoxes = xBoxes;
 	}
+	
 
 	public int getyBoxes() {
 		return yBoxes;
 	}
+	
 
 	public void setyBoxes(int yBoxes) {
 		this.yBoxes = yBoxes;
 	}
+	
 
 	public int getInitialXPosition() {
 		return initialXPosition;
 	}
+	
 
 	public void setInitialXPosition(int initialXPosition) {
 		this.initialXPosition = initialXPosition;
 	}
+	
 
 	public int getInitialYPosition() {
 		return initialYPosition;
 	}
+	
 
 	public void setInitialYPosition(int initialYPosition) {
 		this.initialYPosition = initialYPosition;
 	}
+	
 
 	public int getFinalXPosition() {
 		return finalXPosition;
 	}
+	
 
 	public void setFinalXPosition(int finalXPosition) {
 		this.finalXPosition = finalXPosition;
 	}
+	
 
 	public int getFinalYPosition() {
 		return finalYPosition;
 	}
+	
 
 	public void setFinalYPosition(int finalYPosition) {
 		this.finalYPosition = finalYPosition;
 	}
+	
 
 	public double getPercentChance() {
 		return percentChance;
 	}
+	
 
 	public void setPercentChance(double percentChance) {
 		this.percentChance = percentChance;
 	}
+	
 
 	public int getWait() {
 		return wait;
 	}
+	
 
 	public void setWait(int wait) {
 		this.wait = wait;
